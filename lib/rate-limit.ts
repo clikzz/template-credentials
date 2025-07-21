@@ -3,7 +3,7 @@ import { db } from "~/db";
 
 export async function checkRateLimit(
   identifier: string,
-  maxRequests: number = 2,
+  maxRequests = 2,
   windowMs: number = 24 * 60 * 60 * 1000, // 2 mensajes cada 24 horas
 ): Promise<{ allowed: boolean; remaining: number }> {
   const now = new Date();

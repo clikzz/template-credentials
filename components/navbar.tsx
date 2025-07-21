@@ -36,9 +36,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { LogoutButton } from "@/components/logout-button";
+import Image from "next/image";
 
 interface BaseNavItem {
   href: string;
@@ -109,13 +110,13 @@ const useNavigation = (user: UserProps | null, isLandingPage: boolean) => {
   }, [user?.role, isLandingPage]);
 };
 
-const Logo: React.FC<{ isLandingPage: boolean }> = ({ isLandingPage }) => (
+const Logo: React.FC<{ isLandingPage: boolean }> = () => (
   <Link
     href={"/"}
     className="flex items-center space-x-3 transition-all duration-200 hover:scale-105"
   >
     <div className="flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-200">
-      <img src="/favicon.ico" alt="Logo de Club CIAF" />
+      <Image src="/favicon.ico" alt="Logo de Club CIAF" />
     </div>
     <span className="text-xl font-bold tracking-tight">Club CIAF</span>
   </Link>
@@ -132,7 +133,7 @@ const MobileNavigation: React.FC<{
     setIsOpen(false);
   }, [setIsOpen]);
 
-  const userName = user?.name || user?.email || "Usuario";
+  const userName = user?.name ?? user?.email ?? "Usuario";
   const userInitials = userName
     .split(" ")
     .map((n) => n[0])
