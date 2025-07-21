@@ -1,5 +1,6 @@
 import type React from "react";
 import NavbarServer from "@/components/navbar-server";
+import { Footer } from "./components/footer";
 
 export default function LandingLayout({
   children,
@@ -10,6 +11,7 @@ export default function LandingLayout({
     <>
       <NavbarServer isLandingPage={true} />
       {children}
+      <Footer />
     </>
   );
 }

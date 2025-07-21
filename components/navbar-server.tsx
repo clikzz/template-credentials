@@ -1,4 +1,4 @@
-import { auth } from "/server/auth";
+import { auth } from "~/auth";
 import Navbar from "./navbar";
 
 interface NavbarServerProps {

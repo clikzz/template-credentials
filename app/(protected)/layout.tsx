@@ -1,5 +1,5 @@
 import type React from "react";
-import { auth } from "@/server/auth";
+import { auth } from "~/auth";
 import { redirect } from "next/navigation";
 import NavbarServer from "@/components/navbar-server";
 

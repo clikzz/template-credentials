@@ -112,7 +112,7 @@ const useNavigation = (user: UserProps | null, isLandingPage: boolean) => {
 const Logo: React.FC<{ isLandingPage: boolean }> = ({ isLandingPage }) => (
   <Link
     href={"/"}
-    className="group flex items-center space-x-3 transition-all duration-200 hover:scale-105"
+    className="flex items-center space-x-3 transition-all duration-200 hover:scale-105"
   >
     <div className="flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-200">
       <img src="/favicon.ico" alt="Logo de Club CIAF" />
@@ -237,7 +237,7 @@ const MobileNavigation: React.FC<{
                 <Button
                   asChild
                   variant="outline"
-                  className="login-button w-full bg-transparent"
+                  className="bg-primary text-primary-foreground border-primary hover:bg-primary/75 focus:bg-primary/90 w-full rounded-xl"
                 >
                   <Link href="/api/auth/signin">Iniciar Sesión</Link>
                 </Button>
@@ -265,16 +265,19 @@ const DesktopNavigation: React.FC<{
           <NavigationMenuLink asChild>
             <Link
               href={item.href}
-              className="hover-underline-blue group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-transparent disabled:pointer-events-none disabled:opacity-50"
+              className="hover:bg-accent hover:text-accent-foreground relative inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none active:scale-95 disabled:pointer-events-none disabled:opacity-50"
               {...(item.external && {
                 target: "_blank",
                 rel: "noopener noreferrer",
               })}
             >
               {!isLandingPage && hasIcon(item) && (
-                <item.icon className="mr-2 h-4 w-4 transition-all duration-200 group-hover:scale-110" />
+                <item.icon className="mr-2 h-4 w-4 transition-all duration-200" />
               )}
-              <span>{item.label}</span>
+              <span className="relative">
+                {item.label}
+                <span className="bg-primary absolute -bottom-1 left-0 h-0.5 w-0 transition-all duration-300 hover:w-full" />
+              </span>
               {hasIcon(item) && item.badge && (
                 <span className="bg-primary text-primary-foreground ml-2 rounded-full px-2 py-0.5 text-xs">
                   {item.badge}
@@ -292,8 +295,13 @@ const DesktopNavigation: React.FC<{
 const UserSection: React.FC<{ user: UserProps | null }> = ({ user }) => {
   if (!user) {
     return (
-      <div className="login-button hidden items-center space-x-3 md:flex">
-        <Button asChild variant="ghost" size="sm" className="login-button">
+      <div className="hidden items-center space-x-3 md:flex">
+        <Button
+          asChild
+          variant="ghost"
+          size="sm"
+          className="bg-primary text-primary-foreground hover:bg-primary/75 focus:bg-primary/90 rounded-xl"
+        >
           <Link href="/api/auth/signin">Iniciar Sesión</Link>
         </Button>
       </div>
@@ -310,8 +318,13 @@ const UserSection: React.FC<{ user: UserProps | null }> = ({ user }) => {
 
   return (
     <div className="hidden items-center gap-2 md:flex">
-      <Button asChild variant="ghost" size="default" className="login-button">
-        <Link href="/home">Panel</Link>
+      <Button
+        asChild
+        variant="ghost"
+        size="default"
+        className="bg-primary text-primary-foreground hover:bg-primary/75 focus:bg-primary/90 rounded-xl"
+      >
+        <Link href="/panel">Panel</Link>
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
